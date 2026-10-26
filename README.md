@@ -6,6 +6,12 @@
 
 [Watch the film ↗](docs/assets/program/walkthrough.mp4) · [Explore the screens](docs/program-gallery.md) · [中文研究方案](docs/interoception-protocol-2026-10.zh-CN.md) · [Run the program](experiments/interoception/README.md)
 
+[Revised scientific design (proposed)](docs/proposal-scientific-design-2026-10.zh-CN.md)
+defines the regional contingency hypothesis, independent behavioral
+calibration and the EI-versus-balanced-sampling comparison. The revised MRI
+attention/effort checks and human schedule remain to be implemented and
+validated; the program media show the existing rating scaffold.
+
 Which insular responses depend on the timing of bodily signals, and which can
 also be explained by attention, external events or action requirements?
 
