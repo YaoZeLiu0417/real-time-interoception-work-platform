@@ -104,17 +104,26 @@ def participant_card(view, size=(1280, 800), *, dynamic=True):
                 d.line((640,390,640,410),fill=white,width=2)
     elif phase in ('synchrony','confidence'):
         rating=view.get('rating') or {}
-        value=rating.get('value')
-        question='刚才，视觉反馈与你的心跳同步吗？' if phase=='synchrony' else '你对刚才的判断有把握吗？'
-        text(d,(640,242),question,32,white,anchor='ma')
-        labels=('不同步','同步') if phase=='synchrony' else ('较没把握','较有把握')
-        for key,x,label in zip((1,2),(430,850),labels):
-            color=white if value in (None,key) else '#666666'
-            text(d,(x,350),str(key),68,color,anchor='ma')
-            text(d,(x,457),label,28,color,anchor='ma')
-            d.line((x-95,513,x+95,513),fill=white if value==key else '#555555',width=3 if value==key else 1)
-        hint='已记录，请等待' if rating.get('confirmed') else '按 1 或 2 选择一次；不能判断可不作答'
-        text(d,(640,614),hint,21,soft,anchor='ma')
+        cursor=rating.get('cursor',4)
+        responded=bool(rating.get('interaction_count',0))
+        question='刚才，视觉反馈与你的心跳有多同步？' if phase=='synchrony' else '你对刚才的判断有多大把握？'
+        text(d,(640,197),question,32,white,anchor='ma')
+        # Identical achromatic geometry for both endpoints and every source.
+        # A visible starting cursor is never silently counted as a response.
+        text(d,(640,290),str(cursor),86,white if responded else '#A3A3A3',anchor='ma')
+        text(d,(640,399),'当前选择' if responded else '起始位置 · 尚未作答',17,'#B5B5B5',anchor='ma')
+        left,right,y=256,1024,478
+        d.line((left,y,right,y),fill='#5C5C5C',width=2)
+        for score in range(1,8):
+            x=left+(score-1)*(right-left)/6
+            if score==cursor:
+                d.ellipse((x-17,y-17,x+17,y+17),fill=FIELD,outline=white if responded else '#A3A3A3',width=2)
+                if responded:d.ellipse((x-6,y-6,x+6,y+6),fill=white)
+            else:d.ellipse((x-3,y-3,x+3,y+3),fill='#A3A3A3')
+            text(d,(x,513),str(score),23,white if score==cursor else '#A3A3A3',bold=score==cursor,anchor='ma')
+        labels=('完全不同步','完全同步') if phase=='synchrony' else ('完全没把握','非常有把握')
+        text(d,(left,558),labels[0],21,soft,anchor='ma')
+        text(d,(right,558),labels[1],21,soft,anchor='ma')
     elif phase=='fixation':
         d.line((630,400,650,400),fill=white,width=2)
         d.line((640,390,640,410),fill=white,width=2)
@@ -266,7 +275,7 @@ def showcase(view, *, family='body_feedback_synchrony', size=(1600,1000)):
     text(d,(1011,465),'PARTICIPANT VIEW',13,'white')
     participant=participant_card(view,(525,328));im.paste(participant,(1011,500))
     phase=view.get('phase','instruction')
-    captions={'instruction':'清晰指令，只需 1 / 2 两键。','trigger_wait':'安静等待，由独立触发启动。','task':'必要刺激，无逐搏答案参照。','synchrony':'两键直接作答，固定时长。','confidence':'记录主观把握，独立于脑分数。','fixation':'固定背景，控制视觉变化。','complete':'完成与中止，都有明确状态。'}
+    captions={'instruction':'清晰指令，只需 1 / 2 两键。','trigger_wait':'安静等待，由独立触发启动。','task':'必要刺激，无逐搏答案参照。','synchrony':'两键调整七级评分，结束时保存。','confidence':'记录主观把握，独立于脑分数。','fixation':'固定背景，控制视觉变化。','complete':'完成与中止，都有明确状态。'}
     text(d,(1011,853),captions.get(phase,'必要刺激与明确响应。'),21,'white')
     text(d,(1011,898),'PsychoPy · ROI stream · Adaptive search',13,'#A2A5AD')
     text(d,(66,970),'SOFTWARE DEMO · Synthetic inputs · No scanner connected',12,'#A2A5AD')

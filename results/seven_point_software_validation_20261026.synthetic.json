@@ -1,0 +1,38 @@
+{
+  "scope": "Software model tests only, no participants or hardware timing validation",
+  "is_synthetic": true,
+  "participants": 0,
+  "response_contract": "two_button_seven_point_v1",
+  "counts": {
+    "tests": 213,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0
+  },
+  "junit_sha256": "879cabd5bdabfe69f160affad0bd4b43b7ea15f959c57fd592a4f6f9bcc42eac",
+  "source_sha256": {
+    "experiments/interoception/__init__.py": "1bc90c8454326eca4881623722d55ce8d8fb01f6da3b5221ff0cc3c61c9b8be6",
+    "experiments/interoception/contracts.py": "2b95dcf0567862c6018e4e0b0f4869d6295506add732ecd551e0afa4f2394337",
+    "experiments/interoception/launcher.py": "166f32353407c9dae97171f047e5b368fd64ac6fd48f7c1b3707ef650bb624c9",
+    "experiments/interoception/native_session.py": "2bb5770d9e9892a4ecbdc05adee9d37142f2e72d4040f597114e3cae820bbe25",
+    "experiments/interoception/neuroadaptive.py": "f766e02aa52505c82d51b4b701f2fa326a9b4060f3d799e1436dcebfd22a5bef",
+    "experiments/interoception/prefix_audit.py": "9cf2e9b6ed1aa992b8b2dddcfd630b056ee822c1085c36016e8fa0562ddaaa20",
+    "experiments/interoception/presentation.py": "292ef2ba49c74117581a5994bea9d5a9f94e28576779fb90c2a775e8ce92dbd8",
+    "experiments/interoception/psychopy_bridge.py": "3e5871fd2f6cf7ee51b3b8d87388911e5cb17e54d297ecd08abdc901ad5fc9b6",
+    "experiments/interoception/psychopy_task.py": "9dbefd3d0c412fe38d4e6a1f8811668ebab38126f7a91b7f29ff979dbf0c83fb",
+    "experiments/interoception/response_box_check.py": "6a2ff28cf3baddea64d307973adc40f256641de98ff536f2cab538f4ec923f4f",
+    "experiments/interoception/roi_glm.py": "303058dc966a2da15c0747c20c5fefbc13424baa0c7ea5304dd449f95e2243d4",
+    "experiments/interoception/roi_input.py": "196860f950b76731ab48be3f93848e3f78b8bf7520fedd629fad9024bdb8b1cb",
+    "experiments/interoception/run_presentation.py": "73dbfe19816d71dfa15ba085feaf9c9386a6e52fe6229c6e9335021670c63868",
+    "experiments/interoception/session.py": "7796c37d9c39813cbaee246a0906a0ac2637aae05cb444e9ee102581cfafa760",
+    "experiments/interoception/simulate.py": "10b21e91a86b2cf98686ca13e8fab6c794dfe726b5a85150686b20ad8bd61ec1",
+    "experiments/interoception/simulate_neuroadaptive.py": "0b72f36a63cca8c8fcd9cb4e5e6085cce3486296d1349bc325bb01e66f89956a",
+    "experiments/interoception/stream_controller.py": "43577ab2094f25bf7894b70330bbba15035aeffd56a4c08b1594a916c04a77f5",
+    "experiments/interoception/taskspace.py": "299165e1c1c35c273031752c9c6a04b4426459173b6c85d78295704f44cc59b1",
+    "experiments/interoception/ui.py": "5ea4322fb21c98bef94831ff9b3f709116a23e8147c9e941c5886753e6bcc21b",
+    "experiments/interoception/validation.py": "1db109f2f3ee8348c253df3761a08156b80aa22f39a9b0f98431ecef16399932"
+  },
+  "native_integration_report": "native_controller_validation_20261026.synthetic.json",
+  "final_presentation_report": "seven_point_presentation_validation_20261026.synthetic.json",
+  "missing_and_endpoint_rules": "Untouched cursor 4 is missing; moving away and returning records 4; repeated adjustment clamps at 1/7; fixed-window end saves the selected level"
+}

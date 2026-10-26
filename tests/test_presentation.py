@@ -73,48 +73,112 @@ def test_either_instruction_button_and_separate_scanner_trigger_are_required():
     assert trigger[0]['physical_trigger_time_s'] is None
 
 
-def test_first_binary_press_locks_rating_without_confirmation_and_keeps_fixed_pages():
+def test_repeated_adjustments_save_final_cursor_without_lock_or_early_advance():
     p = begin(flow()); p.advance(6)
     view = p.advance(6.1, '2')
-    assert view['phase'] == 'synchrony' and view['rating']['value'] == 2
-    assert view['rating']['confirmed'] is True
-    assert p.advance(7, '1')['rating']['value'] == 2
+    assert view['phase'] == 'synchrony' and view['rating']['cursor'] == 5
+    assert view['rating']['responded'] is True
+    assert p.advance(6.2, '2')['rating']['value'] == 6
+    assert p.advance(6.3, '1')['rating']['value'] == 5
     assert p.advance(7.99)['phase'] == 'synchrony'
-    assert p.advance(8)['phase'] == 'confidence'
-    assert p.advance(8.1, '1')['phase'] == 'confidence'
-    assert p.advance(8.2, '2')['rating']['value'] == 1
+    assert p.advance(8)['rating']['cursor'] == 4
+    assert p.advance(8.1, '1')['rating']['value'] == 3
+    assert p.advance(8.2, '2')['rating']['value'] == 4
     assert p.advance(9.99)['phase'] == 'confidence'
     assert p.advance(10)['phase'] == 'fixation'
     ratings = [r for r in p.drain_events() if r['event'] == 'rating_recorded']
-    assert [(r['field'], r['value'], r['confirmed']) for r in ratings] == [('synchrony_binary',2,True), ('confidence_binary',1,True)]
-    assert [r['response_key'] for r in ratings] == ['2', '1']
-    assert all(r['scale'] == 'binary_v1' and r['response_time_s'] == pytest.approx(.1) for r in ratings)
+    assert [(r['field'],r['value'],r['responded']) for r in ratings] == [('synchrony_7point',5,True), ('confidence_7point',4,True)]
+    assert [r['interaction_count'] for r in ratings] == [3,2]
+    assert [r['response_key'] for r in ratings] == ['1','2']
+    assert [r['final_cursor'] for r in ratings] == [5,4]
+    assert ratings[0]['first_interaction_time_s'] == 6.1 and ratings[0]['last_interaction_time_s'] == 6.3
+    assert ratings[0]['first_interaction_rt_s'] == pytest.approx(.1)
+    assert ratings[0]['last_interaction_rt_s'] == ratings[0]['response_time_s'] == pytest.approx(.3)
+    assert all(r['scale'] == 'seven_point_v1' and r['save_basis'] == 'fixed_window_end' for r in ratings)
     assert ratings[1]['preceding_synchrony_response_available'] is True
 
 
-def test_no_binary_response_is_missing_with_no_default_or_inferred_inability():
+def test_untouched_cursor_four_is_missing_with_no_default_or_inferred_inability():
     p = begin(flow()); p.advance(6)
+    assert p.view(6)['rating']['cursor'] == 4
     assert p.view(6)['rating']['value'] is None
     p.advance(8); p.advance(10)
     ratings = [r for r in p.drain_events() if r['event'] == 'rating_recorded']
     assert [r['value'] for r in ratings] == [None, None]
     assert [r['missing_reason'] for r in ratings] == ['no_response', 'no_response']
-    assert all(r['confirmed'] is False for r in ratings)
+    assert all(r['responded'] is False and r['interaction_count'] == 0 and r['final_cursor'] == 4 for r in ratings)
     assert all(r['response_key'] is None and r['response_time_s'] is None for r in ratings)
+    assert all(r['first_interaction_time_s'] is None and r['last_interaction_time_s'] is None
+               and r['first_interaction_rt_s'] is None and r['last_interaction_rt_s'] is None for r in ratings)
     assert ratings[1]['preceding_synchrony_response_available'] is False
 
 
-def test_binary_questions_are_explicit_new_endpoints_and_old_slider_actions_are_rejected():
+def test_seven_point_contract_has_two_adjustment_controls_not_seven_response_keys():
     p = begin(flow()); p.advance(6)
     rating = p.view(6)['rating']
-    assert rating['field'] == 'synchrony_binary' and rating['scale'] == 'binary_v1'
-    assert rating['low'] == 1 and rating['high'] == 2
-    assert [r['label'] for r in rating['options']] == ['不同步', '同步']
-    assert '同步吗' in rating['question']
+    assert rating['field'] == 'synchrony_7point' and rating['scale'] == 'seven_point_v1'
+    assert rating['low'] == 1 and rating['high'] == 7 and rating['cursor'] == rating['initial_cursor'] == 4
+    assert [r['value'] for r in rating['options']] == list(range(1,8))
+    assert all('key' not in item for item in rating['options'])
+    assert rating['controls'] == {'1':'left','2':'right'}
+    assert rating['low_label'] == '完全不同步' and rating['high_label'] == '完全同步'
+    assert p.view(6)['response_contract'] == 'two_button_seven_point_v1'
     for action in ('left', 'right', 'confirm', 'space', 'unable', 'u', 'respond'):
         with pytest.raises(ValueError, match='Unknown action'):p.advance(6.1, action)
-    assert p.advance(8)['rating']['field'] == 'confidence_binary'
-    assert [r['label'] for r in p.view(8)['rating']['options']] == ['较没把握', '较有把握']
+    assert p.advance(8)['rating']['field'] == 'confidence_7point'
+    assert p.view(8)['rating']['low_label'] == '完全没把握'
+    assert p.view(8)['rating']['high_label'] == '非常有把握'
+
+
+@pytest.mark.parametrize('button,endpoint,back', [('1',1,'2'),('2',7,'1')])
+def test_repeated_endpoint_presses_clamp_and_opposite_key_can_move_again(button,endpoint,back):
+    p = begin(flow());p.advance(6)
+    for i in range(10):
+        view = p.advance(6.05+i*.05,button)
+        assert 1 <= view['rating']['cursor'] <= 7
+    assert view['phase'] == 'synchrony' and view['rating']['cursor'] == endpoint
+    assert view['rating']['interaction_count'] == 10
+    moved = p.advance(6.8,back)['rating']
+    assert moved['cursor'] == (2 if endpoint == 1 else 6)
+    assert moved['interaction_count'] == 11
+    events = [r for r in p.drain_events() if r['event'] == 'rating_response']
+    assert len(events) == 11 and sum(r['clamped'] for r in events) == 7
+    assert [r['interaction_count'] for r in events] == list(range(1,12))
+
+
+def test_move_away_then_return_to_four_is_valid_while_untouched_four_stays_missing():
+    p = begin(flow());p.advance(6)
+    p.advance(6.1,'1');assert p.advance(6.2,'2')['rating']['value'] == 4
+    p.advance(8);p.advance(10)
+    ratings = [r for r in p.drain_events() if r['event'] == 'rating_recorded']
+    assert ratings[0]['value'] == ratings[0]['final_cursor'] == 4
+    assert ratings[0]['interaction_count'] == 2 and ratings[0]['missing_reason'] is None
+    assert ratings[1]['value'] is None and ratings[1]['final_cursor'] == 4
+    assert ratings[1]['missing_reason'] == 'no_response'
+
+
+def test_deadline_key_does_not_adjust_next_rating_page_or_change_last_saved_cursor():
+    p = begin(flow())
+    sync = p.advance(6,'2')  # consumed at the end of task, before any rating page
+    assert sync['phase'] == 'synchrony' and sync['rating']['interaction_count'] == 0
+    confidence = p.advance(8,'1')  # deadline keys are too late for either rating page
+    assert confidence['phase'] == 'confidence' and confidence['rating']['cursor'] == 4
+    assert confidence['rating']['interaction_count'] == 0
+    p.advance(8.1,'2');assert p.advance(10,'1')['phase'] == 'fixation'
+    ratings = [r for r in p.drain_events() if r['event'] == 'rating_recorded']
+    assert ratings[0]['value'] is None and ratings[0]['interaction_count'] == 0
+    assert ratings[1]['value'] == 5 and ratings[1]['interaction_count'] == 1
+
+
+def test_repeated_inputs_with_same_poll_timestamp_are_all_kept_in_order():
+    p = begin(flow());p.advance(6)
+    for key in ('1','1','2'):p.advance(6.1,key)
+    rating = p.view(6.1)['rating']
+    assert rating['cursor'] == 3 and rating['interaction_count'] == 3
+    assert rating['first_interaction_time_s'] == rating['last_interaction_time_s'] == 6.1
+    events = [r for r in p.drain_events() if r['event'] == 'rating_response']
+    assert [r['cursor_after'] for r in events] == [3,2,3]
+    assert [r['response_key'] for r in events] == ['1','1','2']
 
 
 @pytest.mark.parametrize('attention', ['heartbeat', 'external'])

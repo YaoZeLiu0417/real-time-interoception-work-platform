@@ -89,6 +89,37 @@ do not run GLMs, GP fits, network calls or disk flushes there.
 Tests use fake windows. Physical PsychoPy timing has not been validated. The
 six proposed families still need complete, piloted task presenters.
 
+## Seven-point behavioral response contract
+
+The newly specified contract is `two_button_seven_point_v1`. Synchrony and
+confidence have fields `synchrony_7point` and `confidence_7point`, with scale
+`seven_point_v1`. This concerns body-feedback report pages; existing binary
+task responses such as GradCPT Go/No-go remain separate.
+
+Each page starts with cursor 4 and value null. Participant key 1 moves one
+level left, key 2 one level right, bounded to 1–7. Repeated adjustments remain
+possible throughout the fixed response window. The first key does not lock
+the answer. At window end, save the final selected value only after an
+interaction; untouched cursor 4 remains `no_response` and null. A deliberate
+4 therefore requires moving away and returning. There is no confirm key or
+early completion. Scanner timing uses fixed windows; no new self-paced
+practice mode is specified here.
+
+`responded` replaces a confirmation flag. Preserve first/last interaction
+times and RTs, interaction count, and the complete response-contract version.
+The legacy single response time/key, where retained, refer to the last
+interaction and cannot stand for a confirmation event. Record actual
+adjustment actions for motor/timing checks.
+
+The endpoint is ordinal, without assumed equal spacing. No response is
+missing, never a zero, default 4 or inability-to-sense label. Explicit
+judgeability remains a separate future probe. Earlier `synchrony_binary`,
+`confidence_binary`, `binary_v1` and `two_button_binary_v1` logs or tests keep
+their historical meaning and cannot be relabeled as seven-point evidence.
+This change does not redefine the neural III–IV GLM contrast, GP objective or
+independent neural-profile aggregation. New rating behavior requires its own
+implementation checks and behavioral pilot.
+
 ## Freeze and validation
 
 New search runs rebuild the GLM and reset GP. Freeze retains the training

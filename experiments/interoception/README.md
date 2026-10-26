@@ -38,11 +38,14 @@ python -m experiments.interoception.run_presentation --simulate --probe-four --q
 
 Participant controls use only the available **1/2 panel**. Either key continues
 instructions. During Go/No-go or visual-rhythm tasks, 1 is the response key.
-Synchrony uses 1 = not synchronous, 2 = synchronous; confidence uses
-1 = lower confidence, 2 = higher confidence. The first valid press locks the
-answer and pages keep fixed durations. No press remains missing, with no
-inference that it means inability to sense. This binary endpoint replaces the
-earlier graded-scale draft and needs a new behavioural pilot.
+Synchrony and confidence use seven ordered levels. Key 1 moves one step left;
+key 2 moves one step right. Repeated adjustments are allowed, bounded at 1 and
+7. Each page starts at 4 with **no answer recorded**. The final cursor is saved
+at the end of the fixed response window only after an interaction. To select
+4, move away and return. No press is missing, not a rating of 4 or evidence of
+inability to sense. There is no confirmation key or early page advance.
+The response contract is `two_button_seven_point_v1`; seven levels do not
+imply equal numerical distances and require a behavioural timing pilot.
 
 `5` is an **operator/demo software trigger**, separate from participant responses;
 Escape is an operator abort. Neither is required from the participant.
@@ -59,7 +62,7 @@ python -m experiments.interoception.response_box_check --seconds 20 --out /priva
 
 The default 1/2 and numpad aliases are unverified placeholders, not a hardware
 claim. `--autoplay` inserts clearly labelled
-synthetic actions; `--capture` stores actual PsychoPy back-buffer screenshots
+synthetic actions; `--capture` stores actual PsychoPy front-buffer screenshots after flip
 and intentionally interrupts frame performance. `--screen` and `--fullscreen`
 select a display for later local review, not site-calibrated viewing geometry.
 
@@ -67,7 +70,7 @@ select a display for later local review, not site-calibrated viewing geometry.
 |---|---|---|
 | Heartbeat / respiration attention | Neutral central fixation | Attention pilot and simultaneous physiology |
 | Visual rhythm | Achromatic intensity targets and response events | Timing, luminance, target sequence and scoring calibration |
-| Body–feedback synchrony | Source-blind cue and two fixed binary response pages | Causal PPG/replay adapters, attention pilot and feedback matching |
+| Body–feedback synchrony | Source-blind cue and two fixed seven-point rating pages | Causal PPG/replay adapters, attention pilot and feedback matching |
 | GradCPT standard / reversed | Abstract city/mountain transitions | Licensed photos, original timing, response windows and scoring |
 
 All CLI presentations require `--simulate`. The state model has explicit
@@ -80,6 +83,29 @@ Read the [Chinese plan](../../docs/interoception-protocol-2026-10.zh-CN.md),
 [event contract](../../docs/interoception-interfaces-2026-10.md).
 
 ## Full synthetic controller
+
+To run the complete native-window controller integration, including six
+development blocks, a frozen optimizer and six independent test blocks:
+
+```bash
+python -m experiments.interoception.native_session --simulate --autoplay --out /private/native_controller_demo_01
+```
+
+This uses the actual outstanding controller commands, task-clock flip
+receipts and synthetic ROI deliveries. It retains the full 32-second HRF
+wait and takes about eight minutes; it does not accelerate the native clock.
+The validation plan, task space and source hashes are saved before the run.
+Six artificial demonstration families are used, with no live devices.
+
+For a headless simulation with repeated validation blocks:
+
+```bash
+python -m experiments.interoception.simulate_neuroadaptive --validation-repeats 2 --out /private/repeated_controller_demo_01
+```
+
+This plan is fixed before development. Position balance applies across a
+complete set of Latin orders; a single order is not fully counterbalanced.
+[Validation design and aggregation](../../docs/independent-validation-2026-10.zh-CN.md).
 
 From the repository root with NumPy and SciPy:
 

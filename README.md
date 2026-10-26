@@ -25,13 +25,25 @@ artwork used by the native launcher and PsychoPy prompt screens. It is not a
 human recording or a hardware timing test. [MP4](docs/assets/program/walkthrough.mp4)
 · [Screenshots and provenance](docs/assets/program/provenance.synthetic.json).
 
+The film and screen gallery use the seven-point response contract. Rating
+pages retain the question and scale; operating instructions appear before
+the task. Earlier binary validation records retain their historical labels.
+
 The operator gets a task library and connection status. The participant gets
 clear instructions, the prescribed stimulus and the required response. No
 second pulse display supplies the answer to a heartbeat-attention task.
 Current and replay feedback share the same visual treatment. The participant
 uses only the available **1/2 response-box panel**; synchrony and confidence
-are fixed-duration binary choices. The other hand remains with finger PPG and
-the emergency squeeze bulb. [Device mapping and controls](experiments/interoception/README.md).
+use **1–7 ordinal ratings** in fixed response windows. Key 1 moves left and
+key 2 moves right, with repeated adjustments allowed. The cursor starts at 4
+without a recorded answer. The window saves the final selected level after
+interaction; leaving 4 untouched is missing. Selecting 4 requires moving away
+and back. No confirmation key is needed. The other hand remains with finger
+PPG and the emergency squeeze bulb. [Device mapping and controls](experiments/interoception/README.md).
+
+The seven levels express order, not equal numerical distances. The rating
+contract is versioned separately from the predefined III–IV MRI target and
+from the Go/No-go responses in the task library.
 
 ## From a question to a test
 
@@ -94,16 +106,33 @@ uses NiBabel. Figure rebuilding additionally uses the optional
 
 ## What the evidence currently supports
 
-**Experimental prototype:** 174 software checks pass, with native PsychoPy
-smoke runs for the four-condition probe and an abstract GradCPT-style presenter.
+**Current software checks:** 213 tests pass, including repeated seven-point
+adjustments, missing responses, frozen predictions, separate test GLMs and
+prespecified repeated validation orders. Six synthetic software runs retain
+all 12 test blocks per run, instead of collapsing repeated conditions.
+
+The native PsychoPy controller also completed six development and six frozen
+test blocks on its actual software clock, with matching start/end receipts.
+The final seven-point window was checked separately after the visual polish.
+[Current verification records](docs/software-verification-2026-10.md).
+
+![Prespecified synthetic orders and independent frozen-profile checks](docs/assets/validation/independent-validation.synthetic.png)
+
+[Independent validation plan](docs/independent-validation-2026-10.zh-CN.md)
+· [Synthetic report](results/independent_profile_validation_20261026.synthetic.json).
+The points are software run–condition means from arbitrary response functions,
+not people or evidence of a biological task ranking.
+
 Real-time scanner input, causal physiology adapters,
 independent task geometry, ROI visibility, licensed GradCPT photographs and
 physical display/response timing still require site development and pilots.
 The 18 candidate presets are a software registry, not 18 validated human tasks.
 The CLI presenter is deliberately restricted to simulation.
 
-[Software verification](results/interoception_interface_validation_20261026.json)
-· [Presentation verification](results/interoception_presentation_validation_20261026.json)
+[Earlier software verification](results/interoception_interface_validation_20261026.json)
+· [Earlier binary presentation verification](results/interoception_presentation_validation_20261026.json)
+· [Seven-point software checks](results/seven_point_software_validation_20261026.synthetic.json)
+· [Native controller integration](results/native_controller_validation_20261026.synthetic.json)
 · [Actual PsychoPy screen](docs/assets/program/actual-psychopy-rating.synthetic.png)
 · [Scientific plan](docs/interoception-protocol-2026-10.zh-CN.md)
 

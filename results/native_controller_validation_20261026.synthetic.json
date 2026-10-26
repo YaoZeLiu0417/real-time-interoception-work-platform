@@ -1,0 +1,865 @@
+{
+  "status": "completed",
+  "scope": "Synthetic native-controller integration, not a neuroscience or hardware result",
+  "is_synthetic": true,
+  "participants": 0,
+  "live_devices": 0,
+  "run_id": "native_ordinal_synthetic_1",
+  "response_contract": "two_button_seven_point_v1",
+  "clock_context": "native_psychopy_software_clock",
+  "uses_virtual_clock": false,
+  "elapsed_software_clock_s": 472.240979899987,
+  "conditions": 6,
+  "development_blocks": 6,
+  "test_blocks": 6,
+  "roi_volume_count": 237,
+  "actual_software_start_receipts": 12,
+  "actual_software_end_receipts": 12,
+  "command_and_display_matched": true,
+  "presentations": [
+    {
+      "block_id": "native_ordinal_synthetic_1_development_001",
+      "command_condition_id": "gradcpt_standard_p1",
+      "display_condition_id": "gradcpt_standard_p1",
+      "role": "development",
+      "planned_task_duration_s": 2.0
+    },
+    {
+      "block_id": "native_ordinal_synthetic_1_development_002",
+      "command_condition_id": "body_feedback_synchrony_p1",
+      "display_condition_id": "body_feedback_synchrony_p1",
+      "role": "development",
+      "planned_task_duration_s": 2.0
+    },
+    {
+      "block_id": "native_ordinal_synthetic_1_development_003",
+      "command_condition_id": "visual_rhythm_p1",
+      "display_condition_id": "visual_rhythm_p1",
+      "role": "development",
+      "planned_task_duration_s": 2.0
+    },
+    {
+      "block_id": "native_ordinal_synthetic_1_development_004",
+      "command_condition_id": "respiration_attention_p1",
+      "display_condition_id": "respiration_attention_p1",
+      "role": "development",
+      "planned_task_duration_s": 2.0
+    },
+    {
+      "block_id": "native_ordinal_synthetic_1_development_005",
+      "command_condition_id": "gradcpt_reversed_p1",
+      "display_condition_id": "gradcpt_reversed_p1",
+      "role": "development",
+      "planned_task_duration_s": 2.0
+    },
+    {
+      "block_id": "native_ordinal_synthetic_1_development_006",
+      "command_condition_id": "body_feedback_synchrony_p1",
+      "display_condition_id": "body_feedback_synchrony_p1",
+      "role": "development",
+      "planned_task_duration_s": 2.0
+    },
+    {
+      "block_id": "native_ordinal_synthetic_1_test_001",
+      "command_condition_id": "heartbeat_attention_p1",
+      "display_condition_id": "heartbeat_attention_p1",
+      "role": "test",
+      "planned_task_duration_s": 2.0
+    },
+    {
+      "block_id": "native_ordinal_synthetic_1_test_002",
+      "command_condition_id": "gradcpt_reversed_p1",
+      "display_condition_id": "gradcpt_reversed_p1",
+      "role": "test",
+      "planned_task_duration_s": 2.0
+    },
+    {
+      "block_id": "native_ordinal_synthetic_1_test_003",
+      "command_condition_id": "respiration_attention_p1",
+      "display_condition_id": "respiration_attention_p1",
+      "role": "test",
+      "planned_task_duration_s": 2.0
+    },
+    {
+      "block_id": "native_ordinal_synthetic_1_test_004",
+      "command_condition_id": "visual_rhythm_p1",
+      "display_condition_id": "visual_rhythm_p1",
+      "role": "test",
+      "planned_task_duration_s": 2.0
+    },
+    {
+      "block_id": "native_ordinal_synthetic_1_test_005",
+      "command_condition_id": "body_feedback_synchrony_p1",
+      "display_condition_id": "body_feedback_synchrony_p1",
+      "role": "test",
+      "planned_task_duration_s": 2.0
+    },
+    {
+      "block_id": "native_ordinal_synthetic_1_test_006",
+      "command_condition_id": "gradcpt_standard_p1",
+      "display_condition_id": "gradcpt_standard_p1",
+      "role": "test",
+      "planned_task_duration_s": 2.0
+    }
+  ],
+  "block_timing": [
+    {
+      "block_id": "native_ordinal_synthetic_1_development_001",
+      "planned_duration_s": 2.0,
+      "onset_s": 18.27705039999273,
+      "offset_s": 20.281154900003457,
+      "actual_software_duration_s": 2.004104500010726
+    },
+    {
+      "block_id": "native_ordinal_synthetic_1_development_002",
+      "planned_duration_s": 2.0,
+      "onset_s": 56.497958399995696,
+      "offset_s": 58.5165818999958,
+      "actual_software_duration_s": 2.0186235000001034
+    },
+    {
+      "block_id": "native_ordinal_synthetic_1_development_003",
+      "planned_duration_s": 2.0,
+      "onset_s": 94.48500449999119,
+      "offset_s": 96.52254940000421,
+      "actual_software_duration_s": 2.0375449000130175
+    },
+    {
+      "block_id": "native_ordinal_synthetic_1_development_004",
+      "planned_duration_s": 2.0,
+      "onset_s": 132.47439839999424,
+      "offset_s": 134.47808760000044,
+      "actual_software_duration_s": 2.0036892000061926
+    },
+    {
+      "block_id": "native_ordinal_synthetic_1_development_005",
+      "planned_duration_s": 2.0,
+      "onset_s": 170.47677860000113,
+      "offset_s": 172.48037969999132,
+      "actual_software_duration_s": 2.003601099990192
+    },
+    {
+      "block_id": "native_ordinal_synthetic_1_development_006",
+      "planned_duration_s": 2.0,
+      "onset_s": 208.48491299999296,
+      "offset_s": 210.5266219000041,
+      "actual_software_duration_s": 2.0417089000111446
+    },
+    {
+      "block_id": "native_ordinal_synthetic_1_test_001",
+      "planned_duration_s": 2.0,
+      "onset_s": 246.5034961999918,
+      "offset_s": 248.5262500999961,
+      "actual_software_duration_s": 2.022753900004318
+    },
+    {
+      "block_id": "native_ordinal_synthetic_1_test_002",
+      "planned_duration_s": 2.0,
+      "onset_s": 284.493138299993,
+      "offset_s": 286.49656349999714,
+      "actual_software_duration_s": 2.0034252000041306
+    },
+    {
+      "block_id": "native_ordinal_synthetic_1_test_003",
+      "planned_duration_s": 2.0,
+      "onset_s": 322.4964464999939,
+      "offset_s": 324.52044389999355,
+      "actual_software_duration_s": 2.0239973999996437
+    },
+    {
+      "block_id": "native_ordinal_synthetic_1_test_004",
+      "planned_duration_s": 2.0,
+      "onset_s": 360.48337800000445,
+      "offset_s": 362.50658719999774,
+      "actual_software_duration_s": 2.023209199993289
+    },
+    {
+      "block_id": "native_ordinal_synthetic_1_test_005",
+      "planned_duration_s": 2.0,
+      "onset_s": 398.47219689999474,
+      "offset_s": 400.4771044999943,
+      "actual_software_duration_s": 2.0049075999995694
+    },
+    {
+      "block_id": "native_ordinal_synthetic_1_test_006",
+      "planned_duration_s": 2.0,
+      "onset_s": 436.47657319999416,
+      "offset_s": 438.4820696999959,
+      "actual_software_duration_s": 2.0054965000017546
+    }
+  ],
+  "hrf_tail_s": 32.0,
+  "max_readout_wait_s": 90.0,
+  "validation_plan_hash": "e67208a37e9a0691ff4ab487b16e0bac9b3cdfedbc3b753982e47923d89cfef7",
+  "selected_validation_order_index": 0,
+  "selected_validation_sequence": [
+    "heartbeat_attention_p1",
+    "gradcpt_reversed_p1",
+    "respiration_attention_p1",
+    "visual_rhythm_p1",
+    "body_feedback_synchrony_p1",
+    "gradcpt_standard_p1"
+  ],
+  "frozen_snapshot_sha256": "ef94bc10c2bf7eed54931d539aff7ce4fa5e5d3004d7ba991db11238f2349e9f",
+  "frozen_snapshot_unchanged_after_test": true,
+  "optimizer_posterior_unchanged_after_test": true,
+  "development_volumes_at_freeze": 123,
+  "development_volumes_after_test": 123,
+  "independent_test_glm": true,
+  "final_test_readouts": [
+    {
+      "block_id": "native_ordinal_synthetic_1_test_001",
+      "role": "test",
+      "beta_difference": 0.17318733045947154,
+      "variance": 0.003067594158203657,
+      "block_onset_s": 246.5034961999918,
+      "block_duration_s": 2.022753900004318,
+      "block_offset_s": 248.5262500999961,
+      "definition_hash": "052df0818fedf7e929f496b958819fdfd6dc0360efad2dfc72a492e76ba8fd88",
+      "units": "percent_signal_change",
+      "roi_order": [
+        "III",
+        "IV"
+      ],
+      "uncertainty_model": "iid_ols_unwhitened",
+      "score_requested_time_s": 472.21761479999986,
+      "availability_basis": "caller_supplied_score_time; controller_must_timestamp_actual_completion",
+      "n_available_volumes": 114,
+      "n_valid_volumes": 114,
+      "n_censored_volumes": 0,
+      "status": "ok",
+      "reason": null,
+      "roi_betas": [
+        0.49758746517343616,
+        0.3244001347139646
+      ],
+      "roi_beta_variances": [
+        0.001773066267118344,
+        0.0014443366245225594
+      ],
+      "roi_beta_covariance": 7.490436671862366e-05,
+      "residual_df": 106,
+      "n_regressors": 8,
+      "condition_number": 20.180130367327596,
+      "available_time_s": 472.21761479999986,
+      "latest_input_available_time_s": 472.213952399994,
+      "latest_sample_time_s": 472.00041140000394,
+      "fit_revision": 114,
+      "design_hash": "09a7b716ae2902c178770641a075a9d011cde972965caa43c5746325170e9449",
+      "limitations": [
+        "Unwhitened iid OLS variance; temporal autocorrelation is not modelled",
+        "ROI extraction, signal scaling, hardware clock calibration and spatial specificity are external"
+      ],
+      "condition_id": "heartbeat_attention_p1"
+    },
+    {
+      "block_id": "native_ordinal_synthetic_1_test_002",
+      "role": "test",
+      "beta_difference": 0.25258802266571695,
+      "variance": 0.0029878957147694567,
+      "block_onset_s": 284.493138299993,
+      "block_duration_s": 2.0034252000041306,
+      "block_offset_s": 286.49656349999714,
+      "definition_hash": "052df0818fedf7e929f496b958819fdfd6dc0360efad2dfc72a492e76ba8fd88",
+      "units": "percent_signal_change",
+      "roi_order": [
+        "III",
+        "IV"
+      ],
+      "uncertainty_model": "iid_ols_unwhitened",
+      "score_requested_time_s": 472.21761479999986,
+      "availability_basis": "caller_supplied_score_time; controller_must_timestamp_actual_completion",
+      "n_available_volumes": 114,
+      "n_valid_volumes": 114,
+      "n_censored_volumes": 0,
+      "status": "ok",
+      "reason": null,
+      "roi_betas": [
+        0.5630544347134507,
+        0.3104664120477338
+      ],
+      "roi_beta_variances": [
+        0.0017270006488170724,
+        0.0014068116538670987
+      ],
+      "roi_beta_covariance": 7.295829395735766e-05,
+      "residual_df": 106,
+      "n_regressors": 8,
+      "condition_number": 20.180130367327596,
+      "available_time_s": 472.21761479999986,
+      "latest_input_available_time_s": 472.213952399994,
+      "latest_sample_time_s": 472.00041140000394,
+      "fit_revision": 114,
+      "design_hash": "09a7b716ae2902c178770641a075a9d011cde972965caa43c5746325170e9449",
+      "limitations": [
+        "Unwhitened iid OLS variance; temporal autocorrelation is not modelled",
+        "ROI extraction, signal scaling, hardware clock calibration and spatial specificity are external"
+      ],
+      "condition_id": "gradcpt_reversed_p1"
+    },
+    {
+      "block_id": "native_ordinal_synthetic_1_test_003",
+      "role": "test",
+      "beta_difference": 0.3031498488805596,
+      "variance": 0.002851802760116273,
+      "block_onset_s": 322.4964464999939,
+      "block_duration_s": 2.0239973999996437,
+      "block_offset_s": 324.52044389999355,
+      "definition_hash": "052df0818fedf7e929f496b958819fdfd6dc0360efad2dfc72a492e76ba8fd88",
+      "units": "percent_signal_change",
+      "roi_order": [
+        "III",
+        "IV"
+      ],
+      "uncertainty_model": "iid_ols_unwhitened",
+      "score_requested_time_s": 472.21761479999986,
+      "availability_basis": "caller_supplied_score_time; controller_must_timestamp_actual_completion",
+      "n_available_volumes": 114,
+      "n_valid_volumes": 114,
+      "n_censored_volumes": 0,
+      "status": "ok",
+      "reason": null,
+      "roi_betas": [
+        0.632215563606942,
+        0.32906571472638235
+      ],
+      "roi_beta_variances": [
+        0.0016483390610569333,
+        0.0013427340645225593
+      ],
+      "roi_beta_covariance": 6.963518273161046e-05,
+      "residual_df": 106,
+      "n_regressors": 8,
+      "condition_number": 20.180130367327596,
+      "available_time_s": 472.21761479999986,
+      "latest_input_available_time_s": 472.213952399994,
+      "latest_sample_time_s": 472.00041140000394,
+      "fit_revision": 114,
+      "design_hash": "09a7b716ae2902c178770641a075a9d011cde972965caa43c5746325170e9449",
+      "limitations": [
+        "Unwhitened iid OLS variance; temporal autocorrelation is not modelled",
+        "ROI extraction, signal scaling, hardware clock calibration and spatial specificity are external"
+      ],
+      "condition_id": "respiration_attention_p1"
+    },
+    {
+      "block_id": "native_ordinal_synthetic_1_test_004",
+      "role": "test",
+      "beta_difference": -0.29165579718611695,
+      "variance": 0.002832114138575197,
+      "block_onset_s": 360.48337800000445,
+      "block_duration_s": 2.023209199993289,
+      "block_offset_s": 362.50658719999774,
+      "definition_hash": "052df0818fedf7e929f496b958819fdfd6dc0360efad2dfc72a492e76ba8fd88",
+      "units": "percent_signal_change",
+      "roi_order": [
+        "III",
+        "IV"
+      ],
+      "uncertainty_model": "iid_ols_unwhitened",
+      "score_requested_time_s": 472.21761479999986,
+      "availability_basis": "caller_supplied_score_time; controller_must_timestamp_actual_completion",
+      "n_available_volumes": 114,
+      "n_valid_volumes": 114,
+      "n_censored_volumes": 0,
+      "status": "ok",
+      "reason": null,
+      "roi_betas": [
+        0.4432860147330607,
+        0.7349418119191776
+      ],
+      "roi_beta_variances": [
+        0.0016369590580643002,
+        0.0013334639343451072
+      ],
+      "roi_beta_covariance": 6.91544269171058e-05,
+      "residual_df": 106,
+      "n_regressors": 8,
+      "condition_number": 20.180130367327596,
+      "available_time_s": 472.21761479999986,
+      "latest_input_available_time_s": 472.213952399994,
+      "latest_sample_time_s": 472.00041140000394,
+      "fit_revision": 114,
+      "design_hash": "09a7b716ae2902c178770641a075a9d011cde972965caa43c5746325170e9449",
+      "limitations": [
+        "Unwhitened iid OLS variance; temporal autocorrelation is not modelled",
+        "ROI extraction, signal scaling, hardware clock calibration and spatial specificity are external"
+      ],
+      "condition_id": "visual_rhythm_p1"
+    },
+    {
+      "block_id": "native_ordinal_synthetic_1_test_005",
+      "role": "test",
+      "beta_difference": 0.7714666706408521,
+      "variance": 0.002917316829756633,
+      "block_onset_s": 398.47219689999474,
+      "block_duration_s": 2.0049075999995694,
+      "block_offset_s": 400.4771044999943,
+      "definition_hash": "052df0818fedf7e929f496b958819fdfd6dc0360efad2dfc72a492e76ba8fd88",
+      "units": "percent_signal_change",
+      "roi_order": [
+        "III",
+        "IV"
+      ],
+      "uncertainty_model": "iid_ols_unwhitened",
+      "score_requested_time_s": 472.21761479999986,
+      "availability_basis": "caller_supplied_score_time; controller_must_timestamp_actual_completion",
+      "n_available_volumes": 114,
+      "n_valid_volumes": 114,
+      "n_censored_volumes": 0,
+      "status": "ok",
+      "reason": null,
+      "roi_betas": [
+        1.183739829347396,
+        0.4122731587065439
+      ],
+      "roi_beta_variances": [
+        0.0016862061259000176,
+        0.0013735805081272455
+      ],
+      "roi_beta_covariance": 7.123490213531562e-05,
+      "residual_df": 106,
+      "n_regressors": 8,
+      "condition_number": 20.180130367327596,
+      "available_time_s": 472.21761479999986,
+      "latest_input_available_time_s": 472.213952399994,
+      "latest_sample_time_s": 472.00041140000394,
+      "fit_revision": 114,
+      "design_hash": "09a7b716ae2902c178770641a075a9d011cde972965caa43c5746325170e9449",
+      "limitations": [
+        "Unwhitened iid OLS variance; temporal autocorrelation is not modelled",
+        "ROI extraction, signal scaling, hardware clock calibration and spatial specificity are external"
+      ],
+      "condition_id": "body_feedback_synchrony_p1"
+    },
+    {
+      "block_id": "native_ordinal_synthetic_1_test_006",
+      "role": "test",
+      "beta_difference": -0.036313931301954316,
+      "variance": 0.003007594978736484,
+      "block_onset_s": 436.47657319999416,
+      "block_duration_s": 2.0054965000017546,
+      "block_offset_s": 438.4820696999959,
+      "definition_hash": "052df0818fedf7e929f496b958819fdfd6dc0360efad2dfc72a492e76ba8fd88",
+      "units": "percent_signal_change",
+      "roi_order": [
+        "III",
+        "IV"
+      ],
+      "uncertainty_model": "iid_ols_unwhitened",
+      "score_requested_time_s": 472.21761479999986,
+      "availability_basis": "caller_supplied_score_time; controller_must_timestamp_actual_completion",
+      "n_available_volumes": 114,
+      "n_valid_volumes": 114,
+      "n_censored_volumes": 0,
+      "status": "ok",
+      "reason": null,
+      "roi_betas": [
+        0.4296648572034224,
+        0.4659787885053767
+      ],
+      "roi_beta_variances": [
+        0.001738386803120955,
+        0.0014160867948917434
+      ],
+      "roi_beta_covariance": 7.34393096381077e-05,
+      "residual_df": 106,
+      "n_regressors": 8,
+      "condition_number": 20.180130367327596,
+      "available_time_s": 472.21761479999986,
+      "latest_input_available_time_s": 472.213952399994,
+      "latest_sample_time_s": 472.00041140000394,
+      "fit_revision": 114,
+      "design_hash": "09a7b716ae2902c178770641a075a9d011cde972965caa43c5746325170e9449",
+      "limitations": [
+        "Unwhitened iid OLS variance; temporal autocorrelation is not modelled",
+        "ROI extraction, signal scaling, hardware clock calibration and spatial specificity are external"
+      ],
+      "condition_id": "gradcpt_standard_p1"
+    }
+  ],
+  "task_geometry": "explicitly artificial coordinates",
+  "masks_used": false,
+  "physical_timing_validated": false,
+  "live_acquisition_ready": false,
+  "error": null,
+  "psychopy_version": "2025.1.1",
+  "frame_count": 28083,
+  "button_mapping_sha256": "9480fcf4e557e78d366f9fa9393b6da27e7457224b1bc772db1fc47d3c5f7795",
+  "predevelopment_snapshot_sha256": "3673f923e4ddc9b5d92b4daaf7f3b8114054491fe5bc955db95181ceff144e41",
+  "frame_interval_statistics_s": {
+    "median": 0.01666369999293238,
+    "p95": 0.019440030003897844,
+    "max": 0.10330669999530073
+  },
+  "record_sha256": "76438da25e0c592b4e5a7e336b6f5dfd1f385933f0d55f7ca35f78033ed91d63",
+  "predevelopment_snapshot": {
+    "scope": "Synthetic software declaration before the native window and development",
+    "response_contract": "two_button_seven_point_v1",
+    "validation_plan": {
+      "schema_version": "independent-validation-plan-v0.1",
+      "design": "cyclic_latin_square",
+      "seed": 17,
+      "condition_ids": [
+        "heartbeat_attention_p1",
+        "respiration_attention_p1",
+        "visual_rhythm_p1",
+        "body_feedback_synchrony_p1",
+        "gradcpt_standard_p1",
+        "gradcpt_reversed_p1"
+      ],
+      "base_order": [
+        "heartbeat_attention_p1",
+        "gradcpt_reversed_p1",
+        "respiration_attention_p1",
+        "visual_rhythm_p1",
+        "body_feedback_synchrony_p1",
+        "gradcpt_standard_p1"
+      ],
+      "n_conditions": 6,
+      "n_orders": 6,
+      "repeats_per_condition_per_order": 1,
+      "n_rounds_per_order": 1,
+      "blocks_per_order": 6,
+      "orders": [
+        {
+          "order_index": 0,
+          "latin_row": 0,
+          "sequence": [
+            "heartbeat_attention_p1",
+            "gradcpt_reversed_p1",
+            "respiration_attention_p1",
+            "visual_rhythm_p1",
+            "body_feedback_synchrony_p1",
+            "gradcpt_standard_p1"
+          ],
+          "n_rounds": 1,
+          "blocks_per_round": 6,
+          "condition_counts": {
+            "heartbeat_attention_p1": 1,
+            "gradcpt_reversed_p1": 1,
+            "respiration_attention_p1": 1,
+            "visual_rhythm_p1": 1,
+            "body_feedback_synchrony_p1": 1,
+            "gradcpt_standard_p1": 1
+          },
+          "adjacent_duplicate_count": 0
+        },
+        {
+          "order_index": 1,
+          "latin_row": 1,
+          "sequence": [
+            "gradcpt_reversed_p1",
+            "respiration_attention_p1",
+            "visual_rhythm_p1",
+            "body_feedback_synchrony_p1",
+            "gradcpt_standard_p1",
+            "heartbeat_attention_p1"
+          ],
+          "n_rounds": 1,
+          "blocks_per_round": 6,
+          "condition_counts": {
+            "gradcpt_reversed_p1": 1,
+            "respiration_attention_p1": 1,
+            "visual_rhythm_p1": 1,
+            "body_feedback_synchrony_p1": 1,
+            "gradcpt_standard_p1": 1,
+            "heartbeat_attention_p1": 1
+          },
+          "adjacent_duplicate_count": 0
+        },
+        {
+          "order_index": 2,
+          "latin_row": 2,
+          "sequence": [
+            "respiration_attention_p1",
+            "visual_rhythm_p1",
+            "body_feedback_synchrony_p1",
+            "gradcpt_standard_p1",
+            "heartbeat_attention_p1",
+            "gradcpt_reversed_p1"
+          ],
+          "n_rounds": 1,
+          "blocks_per_round": 6,
+          "condition_counts": {
+            "respiration_attention_p1": 1,
+            "visual_rhythm_p1": 1,
+            "body_feedback_synchrony_p1": 1,
+            "gradcpt_standard_p1": 1,
+            "heartbeat_attention_p1": 1,
+            "gradcpt_reversed_p1": 1
+          },
+          "adjacent_duplicate_count": 0
+        },
+        {
+          "order_index": 3,
+          "latin_row": 3,
+          "sequence": [
+            "visual_rhythm_p1",
+            "body_feedback_synchrony_p1",
+            "gradcpt_standard_p1",
+            "heartbeat_attention_p1",
+            "gradcpt_reversed_p1",
+            "respiration_attention_p1"
+          ],
+          "n_rounds": 1,
+          "blocks_per_round": 6,
+          "condition_counts": {
+            "visual_rhythm_p1": 1,
+            "body_feedback_synchrony_p1": 1,
+            "gradcpt_standard_p1": 1,
+            "heartbeat_attention_p1": 1,
+            "gradcpt_reversed_p1": 1,
+            "respiration_attention_p1": 1
+          },
+          "adjacent_duplicate_count": 0
+        },
+        {
+          "order_index": 4,
+          "latin_row": 4,
+          "sequence": [
+            "body_feedback_synchrony_p1",
+            "gradcpt_standard_p1",
+            "heartbeat_attention_p1",
+            "gradcpt_reversed_p1",
+            "respiration_attention_p1",
+            "visual_rhythm_p1"
+          ],
+          "n_rounds": 1,
+          "blocks_per_round": 6,
+          "condition_counts": {
+            "body_feedback_synchrony_p1": 1,
+            "gradcpt_standard_p1": 1,
+            "heartbeat_attention_p1": 1,
+            "gradcpt_reversed_p1": 1,
+            "respiration_attention_p1": 1,
+            "visual_rhythm_p1": 1
+          },
+          "adjacent_duplicate_count": 0
+        },
+        {
+          "order_index": 5,
+          "latin_row": 5,
+          "sequence": [
+            "gradcpt_standard_p1",
+            "heartbeat_attention_p1",
+            "gradcpt_reversed_p1",
+            "respiration_attention_p1",
+            "visual_rhythm_p1",
+            "body_feedback_synchrony_p1"
+          ],
+          "n_rounds": 1,
+          "blocks_per_round": 6,
+          "condition_counts": {
+            "gradcpt_standard_p1": 1,
+            "heartbeat_attention_p1": 1,
+            "gradcpt_reversed_p1": 1,
+            "respiration_attention_p1": 1,
+            "visual_rhythm_p1": 1,
+            "body_feedback_synchrony_p1": 1
+          },
+          "adjacent_duplicate_count": 0
+        }
+      ],
+      "position_balance": {
+        "scope": "same_serial_position_across_orders",
+        "complete_cycles": 1,
+        "partial_cycle_orders": 0,
+        "exact_across_all_orders": true,
+        "within_single_order_claimed": false
+      },
+      "carryover_balance_claimed": false,
+      "adjacent_duplicates_avoidable_within_order": true,
+      "outcome_dependent": false,
+      "interpretation": "Prespecified orders; no participant count or efficacy claim",
+      "plan_hash": "e67208a37e9a0691ff4ab487b16e0bac9b3cdfedbc3b753982e47923d89cfef7"
+    },
+    "task_space": {
+      "schema_version": "interoception-taskspace-v0.2",
+      "is_synthetic": true,
+      "status": "simulation",
+      "clock_id": "native_session_synthetic_task_clock",
+      "independent_embedding_id": "toy_coordinates_not_empirical",
+      "normalization_id": "synthetic_unit_square",
+      "roi_definition_id": "synthetic_region_III_IV_psc_v02",
+      "calibration_id": "synthetic_parameters_only",
+      "target": "Candidate task-evoked BOLD difference between predefined Region III and IV",
+      "interpretation": "Not a validated pure interoception, cardiac-phase or directed-connectivity score",
+      "source_paper": "https://doi.org/10.1038/s41586-026-11175-2",
+      "source_mask_repository": "https://github.com/LBCN-Stanford/Nature2026/tree/6072003b285a0dc39912c340f80a56a5098a7c76",
+      "source_mask_space": "MNI152 ICBM 2009c nonlinear asymmetric, as declared by authors",
+      "optimizer": {
+        "burn_in": 5,
+        "length_scale": [
+          0.22,
+          0.22
+        ],
+        "signal_variance": 1.0,
+        "noise_variance": 0.04,
+        "ucb_kappa": 2.0,
+        "ei_xi": 0.01
+      },
+      "optimizer_parameter_status": "Toy defaults, replace with independently calibrated frozen parameters before site use",
+      "glm": {
+        "hrf_tail_s": 32.0,
+        "hrf_dt_s": 0.1,
+        "include_motion": false,
+        "min_residual_df": 4
+      },
+      "glm_timing_status": "Full 32-second tail is a conservative prototype rule, not original Lorenz timing",
+      "conditions": [
+        {
+          "condition_id": "heartbeat_attention_p1",
+          "family": "heartbeat_attention",
+          "label": "关注自身心跳",
+          "preset_id": "p1",
+          "coordinates": [
+            0.095,
+            0.175
+          ],
+          "parameter_values": {
+            "instruction_target": "own_heartbeat",
+            "parameter_status": "explicit_toy_demo_only"
+          },
+          "presentation_plugin": "attention",
+          "implementation_status": "synthetic_native_controller_demonstration_only",
+          "preset_interpretation": "Family-specific candidate settings, not comparable difficulty units"
+        },
+        {
+          "condition_id": "respiration_attention_p1",
+          "family": "respiration_attention",
+          "label": "关注自然呼吸",
+          "preset_id": "p1",
+          "coordinates": [
+            0.215,
+            0.305
+          ],
+          "parameter_values": {
+            "instruction_target": "natural_respiration",
+            "parameter_status": "explicit_toy_demo_only"
+          },
+          "presentation_plugin": "attention",
+          "implementation_status": "synthetic_native_controller_demonstration_only",
+          "preset_interpretation": "Family-specific candidate settings, not comparable difficulty units"
+        },
+        {
+          "condition_id": "visual_rhythm_p1",
+          "family": "visual_rhythm",
+          "label": "外部视觉节律判断",
+          "preset_id": "p1",
+          "coordinates": [
+            0.745,
+            0.195
+          ],
+          "parameter_values": {
+            "interval_s": 0.8,
+            "pulse_width_s": 0.12,
+            "target_probability": 0.25,
+            "parameter_status": "explicit_toy_demo_only"
+          },
+          "presentation_plugin": "visual_rhythm",
+          "implementation_status": "synthetic_native_controller_demonstration_only",
+          "preset_interpretation": "Family-specific candidate settings, not comparable difficulty units"
+        },
+        {
+          "condition_id": "body_feedback_synchrony_p1",
+          "family": "body_feedback_synchrony",
+          "label": "身体与反馈同步感判断",
+          "preset_id": "p1",
+          "coordinates": [
+            0.355,
+            0.595
+          ],
+          "parameter_values": {
+            "attention": "heartbeat",
+            "linkage": "current",
+            "pulse_width_s": 0.12,
+            "parameter_status": "explicit_toy_demo_only"
+          },
+          "presentation_plugin": "body_feedback",
+          "implementation_status": "synthetic_native_controller_demonstration_only",
+          "preset_interpretation": "Family-specific candidate settings, not comparable difficulty units"
+        },
+        {
+          "condition_id": "gradcpt_standard_p1",
+          "family": "gradcpt_standard",
+          "label": "GradCPT普通动作映射",
+          "preset_id": "p1",
+          "coordinates": [
+            0.725,
+            0.735
+          ],
+          "parameter_values": {
+            "period_s": 0.8,
+            "mountain_probability": 0.1,
+            "parameter_status": "explicit_toy_demo_only"
+          },
+          "presentation_plugin": "gradcpt",
+          "implementation_status": "synthetic_native_controller_demonstration_only",
+          "preset_interpretation": "Family-specific candidate settings, not comparable difficulty units"
+        },
+        {
+          "condition_id": "gradcpt_reversed_p1",
+          "family": "gradcpt_reversed",
+          "label": "GradCPT反转动作映射",
+          "preset_id": "p1",
+          "coordinates": [
+            0.565,
+            0.805
+          ],
+          "parameter_values": {
+            "period_s": 0.8,
+            "mountain_probability": 0.1,
+            "parameter_status": "explicit_toy_demo_only"
+          },
+          "presentation_plugin": "gradcpt",
+          "implementation_status": "synthetic_native_controller_demonstration_only",
+          "preset_interpretation": "Family-specific candidate settings, not comparable difficulty units"
+        }
+      ],
+      "fixed_test_plan": [
+        "heartbeat_attention_p1",
+        "gradcpt_reversed_p1",
+        "respiration_attention_p1",
+        "visual_rhythm_p1",
+        "body_feedback_synchrony_p1",
+        "gradcpt_standard_p1"
+      ],
+      "coordinates_interpretation": "Artificial geometry for software tests, not measured task relationships or an insula manifold",
+      "source_taskspace_sha256": "959ba7b888d744aeac2e7f4f7e2e53e77c30af58f8f59a2d54ee902e7ede34a7",
+      "validation_plan_hash": "e67208a37e9a0691ff4ab487b16e0bac9b3cdfedbc3b753982e47923d89cfef7",
+      "validation_order_index": 0,
+      "native_demo_scope": "Six demonstration families, synthetic geometry and ROI values; not a validated human library",
+      "definition_sha256": "5d14885ad36f7012dfa095644e76ef756f815d9734c60c3609f949b4822b9374"
+    },
+    "run_configuration": {
+      "seed": 17,
+      "budget": 6,
+      "test_repeats": 1,
+      "order_index": 0,
+      "baseline_s": 16.0,
+      "max_readout_wait_s": 90.0,
+      "autoplay": true,
+      "button_mapping_sha256": "9480fcf4e557e78d366f9fa9393b6da27e7457224b1bc772db1fc47d3c5f7795"
+    },
+    "source_sha256": {
+      "native_session.py": "2bb5770d9e9892a4ecbdc05adee9d37142f2e72d4040f597114e3cae820bbe25",
+      "presentation.py": "9902b704d3c55a0548d01b7f8ff4f5c7d72c2c0c978eda87e6a110ca2cfbebf1",
+      "run_presentation.py": "458608e232636e15129f4b6fb6c62410096a579c9c391c8915b864d5a3a7ad1f",
+      "ui.py": "4317c33bcb48547ae939761165e513d4da1e8ba6df4e58f40ce93b2fa92c9c8b",
+      "session.py": "7796c37d9c39813cbaee246a0906a0ac2637aae05cb444e9ee102581cfafa760",
+      "roi_glm.py": "303058dc966a2da15c0747c20c5fefbc13424baa0c7ea5304dd449f95e2243d4",
+      "neuroadaptive.py": "f766e02aa52505c82d51b4b701f2fa326a9b4060f3d799e1436dcebfd22a5bef",
+      "psychopy_bridge.py": "3e5871fd2f6cf7ee51b3b8d87388911e5cb17e54d297ecd08abdc901ad5fc9b6",
+      "validation.py": "1db109f2f3ee8348c253df3761a08156b80aa22f39a9b0f98431ecef16399932",
+      "taskspace.py": "299165e1c1c35c273031752c9c6a04b4426459173b6c85d78295704f44cc59b1",
+      "contracts.py": "2b95dcf0567862c6018e4e0b0f4869d6295506add732ecd551e0afa4f2394337",
+      "taskspace.synthetic.json": "75b5fdd069f031595d9d9d2d967d687ffbed117ccefe184cdf410081ef1e730a"
+    },
+    "is_synthetic": true,
+    "participants": 0,
+    "physical_timing_validated": false,
+    "snapshot_sha256": "3673f923e4ddc9b5d92b4daaf7f3b8114054491fe5bc955db95181ceff144e41"
+  },
+  "scope_note": "Executed integration sources are identified in the snapshot. Final instruction/artwork polish and capture changes are checked in the separate presentation report; do not relabel this run as executing those later source bytes."
+}

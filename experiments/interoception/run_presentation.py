@@ -12,7 +12,7 @@ import queue
 import sys
 from .contracts import fingerprint, packet, private_output
 from .psychopy_bridge import NamedTaskClock, PsychoPyBlockBridge
-from .presentation import TaskPresentation
+from .presentation import RESPONSE_CONTRACT, TaskPresentation
 from .ui import FAMILIES, FIELD, participant_card
 
 
@@ -44,16 +44,22 @@ def load_button_mapping(path):
 
 
 def present_block(win, kb, native_clock, flow, bridge, command, *, event_sink,
-                  autoplay=False, captures=None, status_sink=None, key_aliases=None):
+                  autoplay=False, captures=None, status_sink=None, key_aliases=None,
+                  poll_inputs=None):
     """Present one block and dispatch receipts outside flip callbacks.
 
     A caller integrating NeuroadaptiveSession must pass the *outstanding*
     command and the same calibrated task clock. This function does not invent
     ROI values or run an optimizer. CLI demonstrations use manual demo commands.
+    Optional poll_inputs runs after the flip and receipt queue are drained.
+    It should ingest inputs without blocking; fitting/selection belongs between
+    blocks, never inside a flip callback or this per-frame polling hook.
     """
     if (flow.condition_id!=command.get('condition_id') or flow.clock_id!=bridge.clock_id
             or flow.is_synthetic is not bridge.is_synthetic):
         raise ValueError('Presented task, clock and provenance must match the block command')
+    if poll_inputs is not None and not callable(poll_inputs):
+        raise ValueError('poll_inputs must be a callable or None')
     from psychopy import visual
     from PIL import Image, ImageDraw
     from .ui import _abstract_scene
@@ -103,7 +109,15 @@ def present_block(win, kb, native_clock, flow, bridge, command, *, event_sink,
             action=None
             if phase=='instruction' and elapsed>=max(.7,flow.timings['instruction_s']) and key not in auto_done:action='1'
             elif phase=='trigger_wait' and elapsed>=.7 and key not in auto_done:action='trigger'
-            elif phase in ('synchrony','confidence') and elapsed>=.7 and key not in auto_done:action='2'
+            elif phase in ('synchrony','confidence'):
+                # Exercise adjustment and an explicit return to midpoint in
+                # synthetic demos. Real input always comes from the box.
+                steps=((.25,'2'),(.45,'2'),(.65,'1')) if phase=='synchrony' else ((.25,'1'),(.55,'2'))
+                for i,(fraction,response) in enumerate(steps):
+                    candidate=(phase,flow.condition_id,i)
+                    if elapsed>=view['phase_duration_s']*fraction and candidate not in auto_done:
+                        key,action=candidate,response
+                        break
             if action:
                 auto_done.add(key);flow.advance(now,action=action);view=flow.view(now);phase=view['phase']
                 event_sink(dict(kind='synthetic_autoplay_action',action=action,task_time_s=now,is_synthetic=True))
@@ -136,13 +150,16 @@ def present_block(win, kb, native_clock, flow, bridge, command, *, event_sink,
                 card=visual.ImageStim(win,image=_texture(participant_card(view)),size=(1280,800),units='pix',autoLog=False)
                 card_key=key
             card.draw()
-        if captures is not None and phase not in captured:
-            # Captures intentionally interrupt performance; not a timing run.
-            win.getMovieFrame(buffer='back')
-            captures[phase]=win.movieFrames.pop().copy();captured.add(phase)
+        capture_key=phase+('-response' if (view.get('rating') or {}).get('responded') else '')
         win.flip();frames+=1
+        if captures is not None and capture_key not in captured and view['phase_elapsed_s']>=.15:
+            # Skip initial context realization; captures show an established
+            # page, never certify its first frame. Readback affects timing.
+            win.getMovieFrame(buffer='front')
+            captures[capture_key]=win.movieFrames.pop().copy();captured.add(capture_key)
         while not receipts.empty():event_sink(receipts.get_nowait())
         for row in flow.drain_events():event_sink(row)
+        if poll_inputs is not None:poll_inputs()
         if phase in ('complete','aborted'):
             return dict(status='aborted' if phase=='aborted' else 'completed',frames=frames,view=view)
         last_phase=phase
@@ -189,8 +206,9 @@ def run(args):
             psychopy_version=psychopy.__version__,keyboard_backend=str(getattr(kb,'backend','unknown')),
             mode='synthetic_autoplay' if args.autoplay else 'synthetic_manual',
             clock_id=space['clock_id'],definition_hash=definition,live_hardware_connected=False,
-            graphics_capture_enabled=args.capture,physical_timing_validated=False,
-            response_contract='two_button_binary_v1',button_mapping=mapping,
+            graphics_capture_enabled=args.capture,capture_buffer='front_after_flip' if args.capture else None,
+            physical_timing_validated=False,
+            response_contract=RESPONSE_CONTRACT,button_mapping=mapping,
             button_mapping_sha256=fingerprint(mapping)))
         for index,row in enumerate(spec):
             flow=TaskPresentation(row,mode='demo',clock_id=space['clock_id'],timings=durations,seed=args.seed+index)
@@ -213,11 +231,12 @@ def run(args):
         summary=dict(version='0.3',status=status,error=error,is_synthetic=True,
             psychopy_version=psychopy.__version__,participants=0,live_devices=0,
             autoplay=args.autoplay,capture_interrupted_performance=args.capture,
+            capture_buffer='front_after_flip' if args.capture else None,
             block_count=len([r for r in rows if r.get('kind')=='block_started']),
             ended_block_count=len([r for r in rows if r.get('kind')=='block_ended']),
             frames_recorded=len(intervals),frame_intervals_s=intervals,
             physical_display_timing_validated=False,response_device_validated=False,
-            response_contract='two_button_binary_v1',participant_buttons=['1','2'],button_mapping_sha256=fingerprint(mapping))
+            response_contract=RESPONSE_CONTRACT,participant_buttons=['1','2'],button_mapping_sha256=fingerprint(mapping))
         (out/'presentation_summary.private.json').write_text(json.dumps(summary,indent=2,allow_nan=False),encoding='utf-8')
     return 0 if status=='completed' else 130
 
@@ -229,7 +248,7 @@ def parser():
     p.add_argument('--probe-four',action='store_true',help='Four source-blind body-feedback demo cells')
     p.add_argument('--quick',action='store_true',help='Short interface review; not final human timings')
     p.add_argument('--autoplay',action='store_true',help='Synthetic responses and simulated trigger')
-    p.add_argument('--capture',action='store_true',help='Capture actual back-buffer images; affects frame performance')
+    p.add_argument('--capture',action='store_true',help='Capture actual front-buffer images after flip; affects frame performance')
     p.add_argument('--fullscreen',action='store_true');p.add_argument('--screen',type=int,default=0)
     p.add_argument('--seed',type=int,default=20261026);p.add_argument('--out',type=Path,required=True)
     p.add_argument('--button-map',type=Path,default=Path(__file__).with_name('button_mapping.template.json'))

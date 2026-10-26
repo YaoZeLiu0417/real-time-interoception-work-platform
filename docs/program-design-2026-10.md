@@ -28,12 +28,21 @@ in the specified achromatic intensity. Body-feedback current/replay sources
 use identical appearance and never reveal their labels to participants.
 
 Synchrony/confidence pages belong to the body-feedback probe. Only the 1/2
-panel is assumed available. Synchrony is binary (1 not synchronous / 2
-synchronous), as is confidence (1 lower / 2 higher). The first valid key locks
-the response without shortening the fixed page. There is no default answer
-and no additional confirmation key. No press is `no_response`, not a zero
-rating or an inferred inability to sense. This endpoint differs from the old
-graded scales. Explicit judgeability would require an additional piloted probe.
+panel is assumed available. Both pages now specify seven ordered levels,
+using key 1 to step left and key 2 to step right within 1–7. The cursor starts
+at 4, while the recorded value remains null. Repeated adjustments are allowed
+until the fixed page ends, when the final selected level is saved. Selecting
+4 requires a movement away and back. There is no confirmation key or early
+finish. No interaction is `no_response` with a null value, not a default 4,
+a zero rating or an inferred inability to sense.
+
+The new contract is `two_button_seven_point_v1`, with fields
+`synchrony_7point` / `confidence_7point` and scale `seven_point_v1`.
+`responded` records interaction rather than confirmation; first and last
+interaction times/RTs and the interaction count remain available. This is a
+new ordinal endpoint. It does not establish equally spaced levels and must
+not silently absorb earlier binary or continuous-rating results. Explicit
+judgeability still requires an additional piloted probe.
 The attention instructions and the common synchrony question require a
 behavioural pilot: identical questions do not establish a successful attention
 manipulation. Response periods must be handled separately in the human GLM.
@@ -81,3 +90,7 @@ backend using autoplay. Back-buffer captures interrupt frame performance;
 they demonstrate rendered screens and task transitions, not reliable frame
 timing. Site monitors, response devices, scanner triggers, physiology and
 photodiode measurements remain pending.
+
+Existing binary-contract validation records retain their original labels.
+Seven-point software checks and regenerated media have their own contract and
+provenance; a completed run of the earlier contract cannot validate this change.

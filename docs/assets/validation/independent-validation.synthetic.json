@@ -1,0 +1,12 @@
+{
+  "is_synthetic": true,
+  "participants": 0,
+  "source_sha256": "54e02dd5c33c87209e58f0b9705afc07f237291fe1539361eb9b0fb39a934e7a",
+  "runs": 6,
+  "conditions": 6,
+  "points": 36,
+  "test_repeats": 2,
+  "freeze_isolation_checks_passed": true,
+  "plotted_dispersion": null,
+  "scope": "Descriptive software verification, no biological inference"
+}

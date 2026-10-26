@@ -27,10 +27,10 @@ BASE_SITE_FIELDS = (
     'dummy_and_first_analysis_volume_rule', 'display_output_measurement_report',
     'response_device_and_mapping', 'approved_protocol_and_parameter_version',
 )
-RESPONSE_CONTRACT = 'two_button_binary_v1'
+RESPONSE_CONTRACT = 'two_button_seven_point_v1'
 RATING_OPTIONS = {
-    'synchrony': ('刚才，视觉反馈与自己的心跳同步吗？', ('不同步', '同步')),
-    'confidence': ('你对刚才的判断有把握吗？', ('较没把握', '较有把握')),
+    'synchrony': ('刚才，视觉反馈与你的心跳有多同步？', ('完全不同步', '完全同步')),
+    'confidence': ('你对刚才的判断有多大把握？', ('完全没把握', '非常有把握')),
 }
 
 
@@ -49,12 +49,15 @@ class TaskPresentation:
     ``instruction_s`` is a minimum duration, then button 1 or 2 enters trigger
     wait. Only the separate ``trigger`` action starts the block. Both response
     buttons may be operated by one hand; button 2 is unused in detection tasks.
-    Binary ratings lock on their first 1/2 press without another confirmation
-    and never shorten fixed pages. No response is missing, with no default.
-    This endpoint replaces, and is not interchangeable with, the earlier
-    0--100 synchrony slider or four-level confidence scale. It cannot identify
-    an explicit "unable to judge" response; omission alone never establishes
-    that reason. Escape is an operator action, not the patient's panic ball.
+    Seven-point ratings start at cursor 4. Button 1 moves left and button 2
+    moves right, repeatedly, clamped to 1--7. Pages keep their fixed duration;
+    there is no confirm key, first-key lock or early advance. At the end the
+    final cursor is saved only if an adjustment key was used. Untouched 4 is
+    missing, while moving away and returning to 4 is a valid rating. This new
+    endpoint is not interchangeable with the former binary or graded drafts.
+    It cannot identify an explicit "unable to judge" response; omission alone
+    never establishes that reason. Escape is an operator action, not the
+    patient's panic ball.
 
     Real feedback adapters are callables ``feedback_source(now_s) -> events``.
     Each event supplies cue_id, requested_onset_s, available_at_s, clock_id,
@@ -189,9 +192,13 @@ class TaskPresentation:
         self._rating = None
         if phase in ('synchrony', 'confidence'):
             question, labels = RATING_OPTIONS[phase]
-            self._rating = dict(field=phase+'_binary', scale='binary_v1', question=question,
-                value=None, confirmed=False, low=1, high=2, step=1, missing_reason=None,
-                options=[dict(key=str(i), value=i, label=label) for i,label in enumerate(labels, 1)],
+            self._rating = dict(field=phase+'_7point', scale='seven_point_v1', question=question,
+                cursor=4, initial_cursor=4, value=None, responded=False, low=1, high=7, step=1,
+                low_label=labels[0], high_label=labels[1], missing_reason=None,
+                options=[dict(value=i, label=str(i)) for i in range(1,8)],
+                controls={'1':'left','2':'right'}, interaction_count=0,
+                first_interaction_time_s=None, last_interaction_time_s=None,
+                first_interaction_rt_s=None, last_interaction_rt_s=None,
                 response_key=None, response_time_s=None)
             if phase == 'confidence':
                 self._rating['preceding_synchrony_response_available'] = self._synchrony_value is not None
@@ -243,22 +250,36 @@ class TaskPresentation:
             if elapsed >= self.timings[self.phase + '_s']:
                 r = self._rating
                 details = dict(field=r['field'], scale=r['scale'], value=r['value'],
-                    confirmed=r['confirmed'], response_key=r['response_key'],
+                    final_cursor=r['cursor'], initial_cursor=r['initial_cursor'],
+                    responded=r['responded'], interaction_count=r['interaction_count'],
+                    first_interaction_time_s=r['first_interaction_time_s'],
+                    last_interaction_time_s=r['last_interaction_time_s'],
+                    first_interaction_rt_s=r['first_interaction_rt_s'],
+                    last_interaction_rt_s=r['last_interaction_rt_s'], response_key=r['response_key'],
                     response_time_s=r['response_time_s'],
-                    missing_reason=None if r['confirmed'] else 'no_response')
+                    missing_reason=None if r['responded'] else 'no_response',
+                    save_basis='fixed_window_end', low=r['low'], high=r['high'])
                 if self.phase == 'synchrony':
                     self._synchrony_value = r['value']
                 else:
                     details['preceding_synchrony_response_available'] = self._synchrony_value is not None
                 self._emit('rating_recorded', now, **details)
                 self._enter('confidence' if self.phase == 'synchrony' else 'fixation', now)
-            elif not self._rating['confirmed']:
-                if action in ('button_1', 'button_2'):
-                    r = self._rating
-                    value = 1 if action == 'button_1' else 2
-                    r.update(value=value, confirmed=True, response_key=str(value), response_time_s=elapsed)
-                    self._emit('rating_response', now, field=r['field'], scale=r['scale'],
-                        value=value, response_key=str(value), response_time_s=elapsed)
+            elif action in ('button_1', 'button_2'):
+                r = self._rating
+                before = r['cursor']
+                direction = -1 if action == 'button_1' else 1
+                cursor = min(r['high'],max(r['low'],before+direction))
+                if r['interaction_count'] == 0:
+                    r.update(first_interaction_time_s=now,first_interaction_rt_s=elapsed)
+                key = '1' if action == 'button_1' else '2'
+                r.update(cursor=cursor,value=cursor,responded=True,
+                    interaction_count=r['interaction_count']+1,last_interaction_time_s=now,
+                    last_interaction_rt_s=elapsed,response_key=key,response_time_s=elapsed)
+                self._emit('rating_response', now, field=r['field'], scale=r['scale'],
+                    value=cursor, cursor_before=before, cursor_after=cursor,
+                    direction=direction, clamped=cursor == before,
+                    interaction_count=r['interaction_count'], response_key=key, response_time_s=elapsed)
         elif self.phase == 'fixation' and elapsed >= self.timings['fixation_s']:
             self._enter('complete', now)
         return self.view(now)
@@ -342,7 +363,8 @@ class TaskPresentation:
         task_elapsed = 0. if self._task_start is None else min(self.timings['task_s'], now-self._task_start)
         title, instruction = FAMILIES[self.family]
         if self.family == 'body_feedback_synchrony':
-            instruction = ('关注自己的心跳感觉。' if self.attention == 'heartbeat' else '关注中央圆点的明暗变化。') + '\n本段先不用按键。\n稍后用1或2判断视觉反馈是否与心跳同步。'
+            instruction = ('关注自己的心跳感觉。' if self.attention == 'heartbeat' else '关注中央圆点的明暗变化。') + (
+                '\n本段先不用按键。\n评分时1左移、2右移，可反复调整。')
         phase_duration = self.timings.get(self.phase+'_s')
         status = {'complete': '本段已完成', 'aborted': '本段已停止', 'trigger_wait': '等待任务开始'}.get(self.phase, '请按照指令完成本段任务')
         return dict(phase=self.phase, family=self.family, condition_id=self.condition['condition_id'],

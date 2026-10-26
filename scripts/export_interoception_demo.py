@@ -26,7 +26,8 @@ TIMINGS = dict(instruction_s=1.5, task_s=8.0, synchrony_s=3.0,
 SCRIPTED_ACTIONS = {
     1.5: '1',
     3.0: 'trigger',
-    12.0: '2', 14.5: '2',
+    11.75: '2', 12.125: '2', 12.5: '1',
+    14.5: '1', 14.875: '2',
 }
 
 
@@ -122,8 +123,9 @@ def write_gallery(out, has_mp4):
     exhibits = [
         ('participant-instruction.png', '01', '准备。', '明确注意目标，再进入任务。'),
         ('participant-task.png', '02', '观察。', '必要的实验线索，不叠加逐搏答案参照。'),
-        ('participant-rating.png', '03', '判断。', '实际状态机驱动的量尺；此处的按键由脚本模拟。'),
-        ('operator.png', '04', '控制。', '操作者工作台，呈现参与者之外的任务与接口状态。'),
+        ('participant-rating.png', '03', '判断。', '从 4 开始，用 1 / 2 左右调整七级评分；时窗结束保存，未按键记为缺失。此处按键由脚本模拟。'),
+        ('participant-confidence.png', '04', '把握。', '使用相同的量尺记录信心；与脑区分数分别保留。'),
+        ('operator.png', '05', '控制。', '操作者工作台，呈现参与者之外的任务与接口状态。'),
     ]
     gallery = '\n'.join(
         f'<figure class="exhibit"><figcaption><span class="number">{number}</span>'
@@ -181,13 +183,14 @@ def export(out, ffmpeg=None):
     source_hashes = {name: sha256(path) for name, path in source_paths.items()}
     views, registry_path = staged_views()
     chosen = {}
-    for phase in ('instruction', 'task', 'synchrony'):
+    for phase in ('instruction', 'task', 'synchrony', 'confidence'):
         candidates = [view for view in views if view['phase'] == phase]
         chosen[phase] = next((view for view in candidates if view.get('stimulus', {}).get('active')),
                              candidates[len(candidates) // 2])
     for phase, filename in [('instruction', 'participant-instruction.png'),
                             ('task', 'participant-task.png'),
-                            ('synchrony', 'participant-rating.png')]:
+                            ('synchrony', 'participant-rating.png'),
+                            ('confidence', 'participant-confidence.png')]:
         ui.participant_card(chosen[phase]).save(out / filename, optimize=True)
     ui.operator_card(family=FAMILY, view=chosen['task'], status='running',
                      psychopy_available=None, output_label='合成演示 · 无人体记录')[0].save(out / 'operator.png', optimize=True)
@@ -197,7 +200,7 @@ def export(out, ffmpeg=None):
     mp4_report = save_mp4(frames, out / 'walkthrough.mp4', ffmpeg) if ffmpeg else None
     write_gallery(out, has_mp4=mp4_report is not None)
     names = ['hero.png', 'participant-instruction.png', 'participant-task.png',
-             'participant-rating.png', 'operator.png', 'walkthrough.gif', 'index.preview.html']
+             'participant-rating.png', 'participant-confidence.png', 'operator.png', 'walkthrough.gif', 'index.preview.html']
     if mp4_report:
         names.append('walkthrough.mp4')
     if source_hashes != {name: sha256(path) for name, path in source_paths.items()}:

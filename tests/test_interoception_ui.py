@@ -24,8 +24,8 @@ def test_no_feedback_attention_field_only_has_central_fixation_and_demo_label():
 
 def test_no_default_answer_is_distinct_from_button_choice_and_launcher_targets_match_cards():
     base=dict(phase='synchrony',is_synthetic=True)
-    missing=participant_card(dict(base,rating=dict(value=None,confirmed=False)))
-    chosen=participant_card(dict(base,rating=dict(value=1,confirmed=True)))
+    missing=participant_card(dict(base,rating=dict(cursor=4,value=None,interaction_count=0)))
+    chosen=participant_card(dict(base,rating=dict(cursor=4,value=4,interaction_count=2)))
     assert missing.tobytes()!=chosen.tobytes()
     image,hits=operator_card()
     assert image.size==(1280,800)
