@@ -201,7 +201,7 @@ def operator_card(*, family='heartbeat_attention', view=None, status='ready',
     d.ellipse((49,38,74,63),outline=white,width=2)
     d.ellipse((61,38,86,63),outline=cyan,width=2)
     text(d,(103,37),'INTEROCEPTION',19,white)
-    text(d,(103,65),'RESEARCH PLATFORM',10,gray)
+    text(d,(103,65),'REAL-TIME WORK PLATFORM',10,gray)
     text(d,(750,44),'任务呈现',15,white)
     d.line((750,73,810,73),fill=pink,width=2)
     text(d,(861,44),'ROI 流  /  独立控制器',14,gray)
@@ -255,7 +255,7 @@ def showcase(view, *, family='body_feedback_synchrony', size=(1600,1000)):
     """Documentation composition of the same native card renderer."""
     im=Image.new('RGB',(1600,1000),'black')
     im.paste(volume_art((760,666)),(840,5));d=ImageDraw.Draw(im)
-    text(d,(66,47),'INTEROCEPTION  /  RESEARCH PLATFORM',15,'#33B0E4')
+    text(d,(66,47),'INTEROCEPTION  /  REAL-TIME WORK PLATFORM',15,'#33B0E4')
     d.text((62,91),'Interoception',font=display_font(76),fill='white')
     d.text((62,172),'in the scanner.',font=display_font(76),fill='white')
     d.line((66,283,337,283),fill='#DD1D86',width=2)

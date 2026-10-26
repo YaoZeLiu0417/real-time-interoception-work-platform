@@ -9,7 +9,7 @@
   "actual_human_recording": false,
   "renderer": "experiments.interoception.ui",
   "state_machine": "experiments.interoception.presentation.TaskPresentation",
-  "renderer_sha256": "f4204e3c2bb93ca7ee8119e715e4e951c785e8a038a32717076efb001cc735ea",
+  "renderer_sha256": "a9c77bca7f0f1c0ea3b503cf52187b5ed5da2107d1fa049e5b68e113291d2204",
   "presenter_sha256": "9abcaeeb7eb8893366bba9fc58541747069a9a5861d826f24b0720423948ab94",
   "exporter_sha256": "fe1e2562da1421d809f503d264827109c2328cf8b6db525924e690eebe5dbe3e",
   "registry_sha256": "75b5fdd069f031595d9d9d2d967d687ffbed117ccefe184cdf410081ef1e730a",
@@ -64,7 +64,7 @@
     "complete"
   ],
   "gif": {
-    "bytes": 134535,
+    "bytes": 134921,
     "encoded_frames": 29,
     "duration_ms": 20000,
     "palette_colors": 128,
@@ -78,12 +78,12 @@
     "frames": 160,
     "duration_s": 20.0,
     "ffmpeg_executable_sha256": "2ce797a0f88d7f067180338fb227f7b1928ea727bd9a4d7a1d022f7c52af71a3",
-    "bytes": 109710
+    "bytes": 110147
   },
   "files": {
     "hero.png": {
-      "sha256": "f3444b2ff1b53b987aca4995e3c14c8243ff9d41e57f4ae5019a67ad49229be6",
-      "bytes": 439653
+      "sha256": "f9f7e5788e28391daaf2060dbaf89ab62dfab739eee11a568a32af9dbf87b46a",
+      "bytes": 440396
     },
     "participant-instruction.png": {
       "sha256": "24e4be8fbbd4eaf3327aac5b9a92ab7847e0def4fbb27eba8fe980f4e094701b",
@@ -98,20 +98,20 @@
       "bytes": 26590
     },
     "operator.png": {
-      "sha256": "35fddc35b1d23b2a87d56b32cfe970b7ccfc1426fc964d82c5d5393b5dae1938",
-      "bytes": 143435
+      "sha256": "4d504cd3323198fce0dfaa9fd4c7a34075578143fe6dc643187ad14160748e7c",
+      "bytes": 143547
     },
     "walkthrough.gif": {
-      "sha256": "d823340e4483c968bd06bb4da9a9c92a60607787fab176e0bcc5af972afb1ede",
-      "bytes": 134535
+      "sha256": "084dff96c64ec7746dd27b9fec70a9bdfbebf964d972faffd1699e10c02ad605",
+      "bytes": 134921
     },
     "index.preview.html": {
       "sha256": "025f0b37f1f4db0bb44c7816d034e959ebe77ad3681d3c49296fdb3d82fcfddd",
       "bytes": 6642
     },
     "walkthrough.mp4": {
-      "sha256": "f072246a8072142fe609b8365aee23ee13edf7fae3728aa43b16d976c99ab37c",
-      "bytes": 109710
+      "sha256": "59fe15e8f64d3fe8183e5065f89373390dab1ba1e643c1543cf87038dbf327d3",
+      "bytes": 110147
     }
   }
 }

@@ -12,8 +12,10 @@ this program.
 The extraction preserves the `experiments.interoception` Python module paths,
 the eight experiment test modules, the protocol and interface documentation,
 the shared program artwork, demonstration media and two synthetic software
-verification records. Source code, tests and retained media are copied without
-rewriting their contents. The root README and experiment setup notes are
+verification records. Core algorithms and test modules remain unchanged.
+The standalone UI uses the project name **Real-Time Interoception Work Platform**.
+Its documentation media are regenerated from the shared renderer.
+The root README and experiment setup notes are
 adapted to the standalone layout. The site-profile template adds the reported
 clinical equipment constraints and leaves all calibration evidence pending.
 

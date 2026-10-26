@@ -1,4 +1,4 @@
-# Interoception experiments
+# Real-Time Interoception Work Platform
 
 **Body timing. Task space. Reproducible responses.**
 
